@@ -18,6 +18,13 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        title: Text("My App", style: TextStyle(
+          color: Colors.black,
+          
+        ),),
+      ),
       body: Column(
         children: [
           Expanded(
@@ -44,8 +51,8 @@ class _MyHomePageState extends State<MyHomePage> {
               currentIndex: posicaoPagina,
               items: [
               BottomNavigationBarItem(
-                  label: "1", icon: Icon(Icons.text_increase_sharp)),
-              BottomNavigationBarItem(label: "2", icon: Icon(Icons.image))
+                  label: "Números", icon: Icon(Icons.numbers)),
+              BottomNavigationBarItem(label: "Tarefas", icon: Icon(Icons.list))
             ]),
           )
         ],

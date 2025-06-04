@@ -12,7 +12,7 @@ class _PaginaTeste2State extends State<PaginaTeste2> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Colors.amber,
+        color: Colors.grey.shade100,
       ),
     );
   }
