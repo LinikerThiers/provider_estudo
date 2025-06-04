@@ -48,7 +48,14 @@ class _MyHomePageState extends State<MyHomePage> {
               width: 1,
             ))),
             child: BottomNavigationBar(
+              backgroundColor: Colors.white,
+              selectedItemColor: Colors.black,
+              unselectedItemColor: Colors.grey[600],
               currentIndex: posicaoPagina,
+              type: BottomNavigationBarType.fixed,
+              onTap: (value) {
+                controller.jumpToPage(value);
+              },
               items: [
               BottomNavigationBarItem(
                   label: "Números", icon: Icon(Icons.numbers)),
