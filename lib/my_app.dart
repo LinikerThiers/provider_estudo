@@ -1,19 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:provider/pages/my_home_page.dart';
+import 'package:provider/provider.dart';
+import 'package:provider_app/pages/my_home_page.dart';
+import 'package:provider_app/service/dark_mode_service.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<DarkModeService>(
+            create: (_) => DarkModeService())
+      ],
+      //Ao utilizar o MultiProvider podemos usar os provider criados
+      //Nesse caso foi criado o provider do tipo DarkModeService
+      //que exige uma função que irá instanciar a função DarkModeService
+      child: Consumer<DarkModeService>(builder: (_, darkModeService, widget) {
+        return MaterialApp(
+          title: 'Flutter Demo',
+          debugShowCheckedModeBanner: false,
+          theme: darkModeService.darkMode ? ThemeData.dark() : ThemeData.light(),
+          home: const MyHomePage(title: 'Flutter Demo Home Page'),
+        );
+      }),
     );
   }
 }

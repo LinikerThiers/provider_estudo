@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/pages/pagina_teste.dart';
-import 'package:provider/pages/pagina_teste_2.dart';
+import 'package:provider/provider.dart';
+import 'package:provider_app/pages/pagina_teste.dart';
+import 'package:provider_app/pages/pagina_teste_2.dart';
+import 'package:provider_app/service/dark_mode_service.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -17,13 +19,31 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: Text("My App", style: TextStyle(
-          color: Colors.black,
-          
-        ),),
+        title: Consumer<DarkModeService>(
+          builder: (_, darkModeService, widget) {
+            return Text(
+              "My App",
+              style: TextStyle(
+                color: darkModeService.darkMode ? Colors.white : Colors.black,
+              ),
+            );
+          }
+        ),
+        actions: [
+          Center(child: Text("Dark Mode")),
+          // Consumer escuta apenas essa parte do widget tree
+          // e reconstrói apenas o Switch quando darkMode mudar
+          Consumer<DarkModeService>(builder: (_, darkModeService, widget) {
+            // Switch que altera o valor do modo escuro
+            return Switch(
+                value: darkModeService.darkMode,
+                onChanged: (bool value) {
+                  // Atualiza o valor do modo escuro com base no estado do switch
+                  darkModeService.darkMode = !darkModeService.darkMode;
+                });
+          })
+        ],
       ),
       body: Column(
         children: [
@@ -47,20 +67,25 @@ class _MyHomePageState extends State<MyHomePage> {
               color: Colors.grey.shade600,
               width: 1,
             ))),
-            child: BottomNavigationBar(
-              backgroundColor: Colors.white,
-              selectedItemColor: Colors.black,
-              unselectedItemColor: Colors.grey[600],
-              currentIndex: posicaoPagina,
-              type: BottomNavigationBarType.fixed,
-              onTap: (value) {
-                controller.jumpToPage(value);
-              },
-              items: [
-              BottomNavigationBarItem(
-                  label: "Números", icon: Icon(Icons.numbers)),
-              BottomNavigationBarItem(label: "Tarefas", icon: Icon(Icons.list))
-            ]),
+            child: Consumer<DarkModeService>(
+              builder: (_, darkModeService, widget) {
+                return BottomNavigationBar(
+                    elevation: 0,
+                    selectedItemColor:  darkModeService.darkMode ? Colors.white : Colors.black,
+                    unselectedItemColor: darkModeService.darkMode ? Colors.grey[700] : Colors.grey[500],
+                    currentIndex: posicaoPagina,
+                    type: BottomNavigationBarType.fixed,
+                    onTap: (value) {
+                      controller.jumpToPage(value);
+                    },
+                    items: [
+                      BottomNavigationBarItem(
+                          label: "Números", icon: Icon(Icons.numbers)),
+                      BottomNavigationBarItem(
+                          label: "Tarefas", icon: Icon(Icons.list))
+                    ]);
+              }
+            ),
           )
         ],
       ),
