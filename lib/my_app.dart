@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:provider_app/pages/my_home_page.dart';
+import 'package:provider_app/repository/tarefa_repository.dart';
 import 'package:provider_app/service/contador_service.dart';
 import 'package:provider_app/service/dark_mode_service.dart';
 
@@ -15,6 +16,7 @@ class MyApp extends StatelessWidget {
             create: (_) => DarkModeService()),
         ChangeNotifierProvider<ContadorService>(
             create: (_) => ContadorService()),
+        ChangeNotifierProvider<TarefaRepository>(create: (_) => TarefaRepository()),
       ],
       //Ao utilizar o MultiProvider podemos usar os provider criados
       //Nesse caso foi criado o provider do tipo DarkModeService

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:provider_app/pages/contador_page.dart';
-import 'package:provider_app/pages/pagina_teste_2.dart';
+import 'package:provider_app/pages/tarefas_page.dart';
 import 'package:provider_app/service/dark_mode_service.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -57,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
             },
             children: [
               ContadorPage(),
-              PaginaTeste2(),
+              TarefasPage(),
             ],
           )),
           Container(
