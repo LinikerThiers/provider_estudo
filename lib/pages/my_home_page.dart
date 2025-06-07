@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:provider_app/pages/pagina_teste.dart';
+import 'package:provider_app/pages/contador_page.dart';
 import 'package:provider_app/pages/pagina_teste_2.dart';
 import 'package:provider_app/service/dark_mode_service.dart';
 
@@ -56,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
               });
             },
             children: [
-              PaginaTeste(),
+              ContadorPage(),
               PaginaTeste2(),
             ],
           )),

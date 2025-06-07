@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:provider_app/pages/my_home_page.dart';
+import 'package:provider_app/service/contador_service.dart';
 import 'package:provider_app/service/dark_mode_service.dart';
 
 class MyApp extends StatelessWidget {
@@ -11,7 +12,9 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<DarkModeService>(
-            create: (_) => DarkModeService())
+            create: (_) => DarkModeService()),
+        ChangeNotifierProvider<ContadorService>(
+            create: (_) => ContadorService()),
       ],
       //Ao utilizar o MultiProvider podemos usar os provider criados
       //Nesse caso foi criado o provider do tipo DarkModeService
@@ -20,7 +23,8 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           title: 'Flutter Demo',
           debugShowCheckedModeBanner: false,
-          theme: darkModeService.darkMode ? ThemeData.dark() : ThemeData.light(),
+          theme:
+              darkModeService.darkMode ? ThemeData.dark() : ThemeData.light(),
           home: const MyHomePage(title: 'Flutter Demo Home Page'),
         );
       }),
